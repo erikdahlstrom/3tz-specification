@@ -4,8 +4,7 @@ The 3D Tiles Archive format 1.3 is based on the zip file format as defined by th
 
 A 3D Tiles archive must be a valid zip file according to the ISO/IEC 21320-1:2015 specification, with the addition of the Zstandard compression method as defined in “APPNOTE - .Zip File Format Specification” version 6.3.9, noting that it must use compression method ID 93 to indicate Zstandard was used.
 
-Informative note:
-> _For optimal read performance, files in the archive should be stored without compression, however, for a good trade of read performance and file size, use the Zstandard compression method. For best compatibility with legacy software, choose the standard deflate compression method, noting that this is the slowest of the three methods._
+> **Informative note**: _For optimal read performance, files in the archive should be stored without compression, however, for a good trade of read performance and file size, use the Zstandard compression method. For best compatibility with legacy software, choose the standard deflate compression method, noting that this is the slowest of the three methods._
 
 All Local File Headers in the zip file must have compressed file size, uncompressed file size and crc32 set in the header. Note: this restricts the maximum file size for files inside the archive to 4 GB.
 
@@ -26,6 +25,8 @@ The archive must use the *.3tz file extension.
 The archive must contain a valid index file and it must be stored uncompressed, to improve load and read performance when the archive contains a very large number of files. The index file must be named `@3dtilesIndex1@` and must be the last file in the archive (read: it must be the last entry in the zip’s Central Directory [see Zip File Format Specification]).
 
 The `@3dtilesIndex1@` file in the archive must not have an associated file comment in the Zip Central Directory (see Zip File Format Specification).
+
+## Reading and writing the index file
 
 To generate the `@3dtilesIndex1@` index file follow these steps.
 
@@ -62,6 +63,7 @@ c.	Otherwise, find all index entries that have the same MD5 hash (they will be a
 6.	Return the associated decompressed file contents (see Zip File Format Specification).
 
 ## Efficient reading of the 3D Tiles Archive Format
+
 Readers of 3dtiles archive format are suggested to not use an off-the-shelf zip archive reader for opening the archive, but instead to first scan the archive a few hundred bytes from the end to find the last entry in the Central Directory. If the filename of the last entry matches the known 3dtiles archive index filename as defined by this specification, attempt to load the file contents by using the information found in the Central Directory entry. Then use the index to quickly find files inside the archive, as described above.
 
 It’s still possible to read the 3D Tiles Archive as a standard zip archive, noting that it might be very slow in comparison.
