@@ -1,4 +1,4 @@
-# 3D Tiles Archive Format 1.3
+# 3D Tiles Archive Format v1.3
 
 The 3D Tiles Archive format 1.3 is based on the zip file format as defined by the ISO/IEC 21320-1:2015 specification, see https://www.iso.org/standard/60101.html, with the addition of the Zstandard compression method defined in “APPNOTE - .Zip File Format Specification” version 6.3.9, https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.9.TXT. The Zstandard compression format itself is defined in IETF RFC 8474, https://tools.ietf.org/html/rfc8478.
 
