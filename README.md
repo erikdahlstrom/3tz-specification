@@ -1,6 +1,6 @@
 # 3D Tiles Archive Format
 
-The 3D Tiles Archive Format is based on the zip file format.
+The 3D Tiles Archive Format is a container format for 3D Tiles datasets based on the zip file format.
 
 * [Latest editor's draft](Specification.md)
 
